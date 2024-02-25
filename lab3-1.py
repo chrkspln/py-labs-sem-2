@@ -16,15 +16,8 @@
 # юніттести
 import unittest
 
-# ГЛОБАЛЬНІ і та j це значення індексів в масиві,
-# де і відповідає за ряки (n) а j - за стовпці (m)
-i = 0
-j = 0
-# майбутній результат
-result_arr = []
 
-
-def diag_up(i, j):
+def diag_up(i, j, n, m, arr, result_arr):
     while 0 < i <= n - 1 and 0 <= j <= m - 2:
         i -= 1
         j += 1
@@ -33,7 +26,7 @@ def diag_up(i, j):
     return i, j
 
 
-def diag_down(i, j):
+def diag_down(i, j, n, m, arr, result_arr):
     while 0 <= i <= n - 2 and 0 < j <= m - 1:
         i += 1
         j -= 1
@@ -42,7 +35,7 @@ def diag_down(i, j):
     return i, j
 
 
-def go_right(i, j):
+def go_right(i, j, n, m, arr, result_arr):
     if j != m - 1:
         j += 1
         curr_val = arr[i][j]
@@ -50,7 +43,7 @@ def go_right(i, j):
     return i, j
 
 
-def go_down(i, j):
+def go_down(i, j, n, m, arr, result_arr):
     if i != n - 1:
         i += 1
         curr_val = arr[i][j]
@@ -59,6 +52,7 @@ def go_down(i, j):
 
 
 def arr_zigzag_traverse(arr, n, m):
+    result_arr = []
     # ЛОКАЛЬНІ і та j це значення індексів в масиві, де і відповідає за ряки (n)
     # а j - за стовпці (m)
     i = 0
@@ -75,28 +69,28 @@ def arr_zigzag_traverse(arr, n, m):
         # якшо стоїмо на передостанньому елементі,
         # просто рухаємся вправо і виходим
         if i == n - 1 and j == m - 2:
-            go_right(i, j)
+            go_right(i, j, n, m, arr, result_arr)
             return result_arr
         # якшо стоїмо на першому рядку, але не останньому стовпчику ->
         # -> рухаємся вправо а потім по діагоналі вниз
         elif i == 0 and j >= 0 and j != m - 1:
-            i, j = go_right(i, j)
-            i, j = diag_down(i, j)
+            i, j = go_right(i, j, n, m, arr, result_arr)
+            i, j = diag_down(i, j, n, m, arr, result_arr)
         # якшо стоїмо на останньому рядку, але не на останньому стовпчику ->
         # -> рухаємся вправо і по діагоналі вгору
         elif i == n - 1 and j >= 0 and j != m - 1:
-            i, j = go_right(i, j)
-            i, j = diag_up(i, j)
+            i, j = go_right(i, j, n, m, arr, result_arr)
+            i, j = diag_up(i, j, n, m, arr, result_arr)
         # якшо стоїмо на крайньому лівому стовпчику ->
         # -> рухаємся вниз на рядок а потім по діагоналі вгору
         elif i != n - 1 and j == 0:
-            i, j = go_down(i, j)
-            i, j = diag_up(i, j)
+            i, j = go_down(i, j, n, m, arr, result_arr)
+            i, j = diag_up(i, j, n, m, arr, result_arr)
         # якшо стоїмо на останньому стовпчику ->
         # -> рухаємся вниз на рядок і по діагоналі вниз
         elif j == m - 1:
-            i, j = go_down(i, j)
-            i, j = diag_down(i, j)
+            i, j = go_down(i, j, n, m, arr, result_arr)
+            i, j = diag_down(i, j, n, m, arr, result_arr)
 
 
 # Для перевірки виконання роботи реалізованого алгоритму
@@ -166,16 +160,16 @@ class Lab1Test(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    # unittest.main()
-    arr = [
-        [1, 2, 3, 4, 5],
-        [6, 7, 8, 9, 10],
-        [11, 12, 13, 14, 15],
-        [16, 17, 18, 19, 20],
-        [21, 22, 23, 24, 25]
-    ]
-    n = 5
-    m = 5
-    result = arr_zigzag_traverse(arr, n, m)
-    for i in result:
-        print(i)
+    unittest.main()
+    #   arr = [
+    #       [1, 2, 3, 4, 5],
+    #       [6, 7, 8, 9, 10],
+    #       [11, 12, 13, 14, 15],
+    #       [16, 17, 18, 19, 20],
+    #       [21, 22, 23, 24, 25]
+    #   ]
+    #   n = 5
+    #   m = 5
+    #   result = arr_zigzag_traverse(arr, n, m)
+    #   for i in result:
+    #       print(i)
