@@ -48,6 +48,7 @@ def how_many_hamsters(hamsters_list, hamsters_quantity, daily_food):
 
     # сортуємо список хом'ячків за жадібністю, від меншої до більшої
     hamsters_list = sorted(hamsters_list, key=lambda arr: arr[1])
+    hamsters_list = sorted(hamsters_list)
 
     adopted_hamsters_list = []
     food_already_needed = 0
@@ -89,6 +90,7 @@ def how_many_hamsters(hamsters_list, hamsters_quantity, daily_food):
 
 
 class Lab2Test(unittest.TestCase):
+    # task tests
     def test_example1(self):
         S = 7
         C = 3
@@ -120,7 +122,7 @@ class Lab2Test(unittest.TestCase):
         expected_result = 1
         self.assertEqual(how_many_hamsters(hamsters, C, S), expected_result, "error!")
 
-# gpt tests
+    # gpt tests
     def test_basic_case(self):
         hamsters_list = [(10, 5), (8, 4), (7, 3)]
         hamsters_quantity = 3
@@ -149,6 +151,26 @@ class Lab2Test(unittest.TestCase):
         expected_result = 0
         self.assertEqual(how_many_hamsters(hamsters_list, hamsters_quantity, daily_food), expected_result)
 
+    # student tests
+    def v_test(self):
+        hamsters_list = [(17, 3), (8, 4), (7, 3)]
+        hamsters_quantity = 3
+        daily_food = 30
+        expected_result = 2
+        self.assertEqual(how_many_hamsters(hamsters_list, hamsters_quantity, daily_food), expected_result)
+
+    def my_test(self):
+        hamsters_list = [[4, 2], [2, 3], [1, 4], [6, 2], [1, 5]]
+        hamsters_quantity = 5
+        daily_food = 29
+        expected_result = 2
+        self.assertEqual(how_many_hamsters(hamsters_list, hamsters_quantity, daily_food), expected_result)
+
+    def test_all_greedy_hamsters(self):
+        S = 24
+        C = 4
+        hamsters = [[5, 2], [5, 3], [2, 1], [5, 5]]
+        self.assertEqual(how_many_hamsters(hamsters, C, S), 3)
 
 if __name__ == '__main__':
     unittest.main()
