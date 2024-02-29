@@ -139,8 +139,7 @@ class Lab2Test(unittest.TestCase):
                     ]
         C = 3
         S = 0
-        expected_result = 0
-        self.assertEqual(how_many_hamsters(hamsters, C, S), expected_result)
+        self.assertEqual(how_many_hamsters(hamsters, C, S), 0)
 
     # student tests
     def v_test(self):
