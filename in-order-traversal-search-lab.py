@@ -19,19 +19,32 @@
 #   Функція отримує на вхід корінь бінарного дерева та
 #   вершину, для якої потрібно знайти наступника.
 
-import unittest
-#   root = BinaryTree(3)
-#   root.left = BinaryTree(9)
-#   root.right = BinaryTree(20)
-
 
 class BinaryTree:
-    def __init__(self, value, left=None, right=None, parent=None):
+    def __init__(self, value, parent=None, left=None, right=None):
         self.value = value
         self.left = left
         self.right = right
         self.parent = parent
 
 
+def inorder_traversal(tree_node: BinaryTree) -> None:
+    if not tree_node:
+        inorder_traversal(tree_node.left)
+        print(tree_node.value)
+        inorder_traversal(tree_node.right)
+
+
 def find_successor(tree: BinaryTree, node: BinaryTree) -> BinaryTree:
     return node
+
+
+if __name__ == '__main__':
+    tree = BinaryTree(1)
+    tree.left = BinaryTree(2, tree)
+    tree.right = BinaryTree(3, tree)
+    tree.left.left = BinaryTree(4, tree.left)
+    tree.right.left = BinaryTree(5, tree.right)
+    tree.left.right = BinaryTree(6, tree.left)
+    tree.right.right = BinaryTree(7, tree.right)
+    inorder_traversal(tree)
