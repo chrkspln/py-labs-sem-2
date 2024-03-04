@@ -28,13 +28,6 @@ class BinaryTree:
         self.parent = parent
 
 
-def inorder_traversal(tree_node: BinaryTree) -> None:
-    if not tree_node:
-        inorder_traversal(tree_node.left)
-        print(tree_node.value)
-        inorder_traversal(tree_node.right)
-
-
 def find_successor(tree: BinaryTree, node: BinaryTree) -> BinaryTree:
     return node
 
@@ -47,4 +40,3 @@ if __name__ == '__main__':
     tree.right.left = BinaryTree(5, tree.right)
     tree.left.right = BinaryTree(6, tree.left)
     tree.right.right = BinaryTree(7, tree.right)
-    inorder_traversal(tree)

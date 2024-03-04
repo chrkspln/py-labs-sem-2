@@ -1,41 +1,5 @@
+from src.BinaryHamstersSearchLab import how_many_hamsters
 import unittest
-
-
-def how_many_hamsters(hamsters_list, hamsters_quantity, daily_food):
-    # якщо список пустий - повертаємо 0
-    if not hamsters_list:
-        return 0
-
-    result = hamsters_search(hamsters_list, 0, hamsters_quantity - 1, daily_food, 0)
-    return result
-
-
-def hamsters_search(list, end, food_av, count, prev_count):
-    start = 0
-    mid = (start + end) // 2
-    mid = count
-    food_needed_list = []
-
-    for for_one, greedy in list:
-        food_needed_list.append(for_one + greedy * mid)
-    food_needed_list = sorted(food_needed_list)
-    required_food = sum(food_needed_list[:mid])
-
-    if required_food > food_av:
-        if prev_count == count:
-            return count
-        elif prev_count < count:
-            hamsters_search(list[:mid], mid - 1, food_av, 0, prev_count)
-            return count
-    elif required_food < food_av and len(list) != 1:
-        if prev_count > count:
-            return count
-        elif prev_count == count:
-            count += 1
-            hamsters_search(list[mid:], len(list) - 1, food_av, count, prev_count)
-            return count
-    else:
-        return len(food_needed_list)
 
 
 class Lab2Test(unittest.TestCase):
@@ -70,6 +34,7 @@ class Lab2Test(unittest.TestCase):
         ]
         self.assertEqual(how_many_hamsters(hamsters, C, S), 1)
 
+    # gpt tests
     def test_basic_case(self):
         hamsters = [
             [10, 5],
@@ -140,17 +105,6 @@ class Lab2Test(unittest.TestCase):
         ]
         self.assertEqual(how_many_hamsters(hamsters, C, S), 3)
 
-    def test_max_hamsters(self):
-        # Перевірка, чи працює функція, коли можна прогодувати всіх хом'ячків
-        C = 3
-        hamsters = [
-            [1, 1],
-            [2, 1],
-            [3, 1],
-        ]
-        S = 10
-        expected_result = 3  # Очікуємо, що можна прогодувати всіх 3 хом'ячків
-        self.assertEqual(how_many_hamsters(hamsters, C, S), expected_result)
 
 if __name__ == '__main__':
     unittest.main()
